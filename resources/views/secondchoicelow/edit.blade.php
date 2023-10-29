@@ -409,9 +409,9 @@
                                     <div class="col-md-4">
                                         <div class="row form-group">
                                             <label for="performance">ለትምህርት ዝግጅት የሚሰጥ ነጥብ</label>
-                                            <input type="number" value="{{ $hr->performance }}"
+                                            <input type="float" value="{{ $hr->performance }}"
                                                 class="form-control @error('performance') is-invalid @enderror" id="performance"
-                                                placeholder="" name="performance" min="1" max="40">
+                                                placeholder="" name="performance" min="0" max="40">
                                             @error('performance')
                                                 <span class=" error invalid-feedback">
                                                     <strong>{{ $message }}</strong>
@@ -422,7 +422,7 @@
                                             <label for="experience">ለስራ ልምድ አገልግሎት የሚሰጥ ነጥብ</label>
                                             <input type="float" value="{{ $hr->experience }}"
                                                 class="form-control @error('experience') is-invalid @enderror" id="experience"
-                                                placeholder="ለስራ ልምድ" name="experience" min="1" max="30">
+                                                placeholder="ለስራ ልምድ" name="experience" min="0" max="30">
                                             @error('experience')
                                                 <span class=" error invalid-feedback">
                                                     <strong>{{ $message }}</strong>
@@ -432,10 +432,10 @@
                                         <div class="row form-group">
                                             <label for="resultbased">ለውጤት ተኮር ምዘና </label>
                                             <input type="float"
-                                                value="{{ round($hr->form->resultOfrecentPerform * 0.3, 2) }}"
+                                                value="{{ $hr->resultbased  }}"
                                                 class="form-control @error('resultbased') is-invalid @enderror"
                                                 id="resultbased" placeholder="ለውጤት ተኮር ምዘና " name="resultbased"
-                                                min="1" max="30">
+                                                min="0" max="30">
                                             @error('resultbased')
                                                 <span class=" error invalid-feedback">
                                                     <strong>{{ $message }}</strong>

@@ -500,8 +500,8 @@
                                                 <label for="performance">ለትምህርት ዝግጅት የሚሰጥ ነጥብ</label>
                                                 <input class="form-control @error('performance') is-invalid @enderror"
                                                     id="performance" placeholder="ለትምህርት ዝግጅት"
-                                                    value="{{ old('performance') }}" type="number" name="performance"
-                                                    min="1" max="25">
+                                                    value="{{ old('performance') }}" type="float" name="performance"
+                                                    min="0" max="25">
                                                 @error('performance')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -512,7 +512,7 @@
                                                 <label for="experience">ለስራ ልምድ አገልግሎት የሚሰጥ ነጥብ</label>
                                                 <input class="form-control @error('experience') is-invalid @enderror"
                                                     id="experience" placeholder="ለስራ ልምድ" value="{{ old('experience') }}"
-                                                    type="float" name="experience" min="1" max="15">
+                                                    type="float" name="experience" min="0" max="15">
                                                 @error('experience')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -524,7 +524,7 @@
                                                 <input class="form-control @error('resultbased') is-invalid @enderror"
                                                     id="resultbased" placeholder="ለውጤት ተኮር"
                                                     value="{{ round($form->resultOfrecentPerform * 0.1, 2) }}" type="float"
-                                                    name="resultbased" min="1" max="10">
+                                                    name="resultbased" min="0" max="10">
                                                 @error('resultbased')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -536,7 +536,7 @@
                                                 <label for="exam">ለፈተና ውጤት</label>
                                                 <input class="form-control @error('exam') is-invalid @enderror" id="exam"
                                                     placeholder="ለፈተና ውጤት" value="{{ old('exam') }}" type="float"
-                                                    name="exam" min="1" max="15">
+                                                    name="exam" min="0" max="15">
                                                 @error('exam')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>

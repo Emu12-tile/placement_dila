@@ -10,21 +10,19 @@
 
     <title>Document</title>
     <style>
-        /* @font-face {
-            font-family: 'noto sans ethiopic', sans-serif;
-            font-style: normal;
-            font-weight: normal;
+        @media print {
+            #header {
+                margin-top: 20mm;
+                /* Adjust the margin for the header on the first page */
+            }
 
-            src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&display=swap.ttf') format('truetype');
-        } */
-        /* @font-face {
-            font-family: 'Noto Sans Ethiopic';
-            font-style: normal;
-            font-weight: 400;
-            font-stretch: 100%;
-            src: url(https://fonts.gstatic.com/s/notosansethiopic/v42/7cHPv50vjIepfJVOZZgcpQ5B9FBTH9KGNfhSTgtoow1KVnIvyBoMSzUMacb-T35OK5D1yGbuaQ.woff2) format('woff2');
-            unicode-range: U+1200-1399, U+2D80-2DDE, U+AB01-AB2E;
-        } */
+            @page :first {
+                #header {
+                    margin-top: 20mm;
+                    /* Adjust the margin for the header on the second page */
+                }
+            }
+        }
 
 
         #customers {
@@ -44,8 +42,8 @@
         }
 
         /* #customers tr:nth-child(even) {
-            background-color: #f2f2f2;
-        } */
+    background-color: #f2f2f2;
+    } */
 
         #customers tr:hover {
             background-color: #ddd;
@@ -64,9 +62,11 @@
 <body>
 
     <div id="element-to-print">
-        {{-- @foreach ($formList as $i => $form) --}}
-        <h1 style="font-family: Noto Sans Ethiopic, sans-serif; text-align:center ">ዲላ ዩኒቨርሲቲ </h1>
-        <h3 style="text-align:center">የአስተዳደር ሠራተኞች ፕሮፋይል</h3>
+        <div id="header">
+            {{-- @foreach ($formList as $i => $form) --}}
+            <h1 style="font-family: Noto Sans Ethiopic, sans-serif; text-align:center ">ዲላ ዩኒቨርሲቲ </h1>
+            <h3 style="text-align:center">የአስተዳደር ሠራተኞች ፕሮፋይል</h3>
+        </div>
         <p>1/ የሠራተኛው ሙሉ ስም:-{{ $form->firstName }} {{ $form->middleName }} {{ $form->lastName }} </p>
         {{-- <p>2/ አሁን ያሉበት የስራ ክፍል፦{{ $form->job_category->job_category }} </p> --}}
         <p>2/ አሁን ያሉበት የስራ መደብ መጠርያ:-{{ $form->positionofnow }} &emsp;
@@ -99,7 +99,7 @@
                         <td>{{ $fo->completion_date ?? '' }} </td>
                     </tr>
                     {{-- <tr>
-                        
+
                         <td>{{ $fo->discipline2 ?? '' }} </td>
                     </tr>
                     <tr>
@@ -133,7 +133,7 @@
             ምርጫ 2</p>
         <p> የስራ ክፍል:- {{ $form->jobcat2->job_category ?? '' }} </p>
         <p> የስራ መደብ:- {{ $form->choice2->position ?? '' }}</p>
-        <div class="html2pdf__page-break"></div>
+        {{-- <div class="html2pdf__page-break"></div> --}}
         <p>6/ ጠቅላላ የስራ ልምድ ብዛትና የስራው አይነት</p>
 
         <table id="customers">
@@ -230,7 +230,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="html2pdf__page-break"></div>
+        {{-- <div class="html2pdf__page-break"></div> --}}
         {{-- <p>9/ አገልግሎት ከዲፕሎማ/ዲግሪ በፊት:- {{ $form->serviceBeforeDiplo }} ፣ አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ
             {{ $form->serviceAfterDiplo }}</p> --}}
         <p>7/ የሁለት ተከታታይ የቅርብ ጊዜ የሥራ አፈጻፀም አማካይ ውጤት:-{{ $form->resultOfrecentPerform }}</p>
@@ -256,7 +256,8 @@
 
 
     html2pdf(element, {
-        margin: 15,
+        margin: 20,
+
         filename: 'Application form.pdf',
         image: {
             type: 'jpeg',
@@ -272,8 +273,12 @@
             unit: 'mm',
             format: 'a4',
             orientation: 'portrait'
+
         }
+
     })
+
+
     setTimeout(function() {
         window.location.href = "{{ url('/hr') }}";
     }, 5000);

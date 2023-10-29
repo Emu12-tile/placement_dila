@@ -352,24 +352,24 @@
                                                             <td>
                                                                 @foreach ($forms as $fo)
                                                                     <?php
-                                                                    
+
                                                                     $fdate = Carbon::parse($fo->startingDate);
-                                                                    
+
                                                                     $tdate = Carbon::parse($fo->endingDate);
-                                                                    
+
                                                                     // $years = $tdate - $fdate;
                                                                     $days = $tdate->diffInDays($fdate);
                                                                     $months = $tdate->diffInMonths($fdate);
-                                                                    
+
                                                                     $years = $tdate->diffInYears($fdate);
                                                                     // dd($fdate->diffForHumans($tdate));
                                                                     // dd($years,$months,$days);
-                                                                    
+
                                                                     $time = $tdate->diff($fdate);
                                                                     // echo $time->y;
-                                                                    
+
                                                                     echo $time->y, 'ዓመት', 'ከ', $time->m, ' ወር በ(', $fo->positionyouworked, '), ';
-                                                                    
+
                                                                     ?>
                                                                 @endforeach
                                                             </td>
@@ -461,7 +461,7 @@
                                             <label for="presidentGrade">ለትምህርት ዝግጅት የሚሰጥ ነጥብ</label>
                                             <input class="form-control" @error('presidentGrade') is-invalid @enderror"
                                                 id="presidentGrade" placeholder="ለትምህርት ዝግጅት የሚሰጥ ነጥብ ከ (35%)"
-                                                value="{{ $hr->presidentGrade }}" type="number" name="presidentGrade"
+                                                value="{{ $hr->presidentGrade }}" type="float" name="presidentGrade"
                                                 min="1" max="35" required>
                                             @error('presidentGrade')
                                                 <span class=" error invalid-feedback">
@@ -475,7 +475,7 @@
                                         <div class="row form-group">
                                             <label for="firstName">ለትምህርት ዝግጅት የሚሰጥ ነጥብ</label>
                                             <input class="form-control" @error('performance') is-invalid @enderror"
-                                                id="firstName" placeholder="" value="{{ $hr->performance }}" type="number"
+                                                id="firstName" placeholder="" value="{{ $hr->performance }}" type="float"
                                                 name="performance" min="1" max="25">
                                             @error('performance')
                                                 <span class=" error invalid-feedback">
@@ -627,7 +627,7 @@
     </div>
 @endsection
 @section('javascript')
-    
+
     <script>
         $(document).ready(function() {
             var totalYear = 0;
