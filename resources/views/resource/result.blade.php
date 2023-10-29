@@ -9,11 +9,8 @@
     @endif
     @role('hr')
         <div class="container">
-
             <section class="hk-sec-wrapper mt-100">
                 <div class="pull-right hk-sec-title">
-
-
                 </div>
                 <h5 class="hk-sec-title">የተወዳዳሪዎች 1ኛ ምርጫ ከቡድን መሪ በላይ አጠቃላይ ውጤት </h5>
                 <div class="row">
@@ -24,27 +21,15 @@
                                 <table id="datable_6" class="table table-hover table-bordered w-100  pb-30">
 
                                     <thead>
-                                        {{-- <tr>
-                                            <th></th>
-                                            <th colspan="9"></th>
-                                        </tr> --}}
                                         <tr>
                                             <th>ተ.ቁ</th>
 
                                             <th>ሙሉ ስም</th>
-
-                                            {{-- <th>ውጤት ሰጪ</th> --}}
-
                                             <th>ለትምህርት ዝግጅት የሚሰጥ ነጥብ</th>
                                             <th>ለስራ ልምድ አገልግሎት የሚሰጥ ነጥብ</th>
                                             <th>ለውጤት ተኮር ምዘና</th>
 
                                             <th>ለፈተና ውጤት</th>
-
-
-
-                                            {{-- <th>አጠቃላይ ውጤት(100%)</th> --}}
-
                                             <th>አጠቃላይ ውጤት(65%)</th>
                                             <th>Action</th>
 
@@ -67,16 +52,10 @@
                                                         <td>{{ $hr->form->full_name }}<p> {{ $hr->form->email }}</p>
 
                                                         </td>
-
-                                                        {{-- <td>{{ $hr->user->name }}</td> --}}
                                                         <td>{{ $hr->performance }}</td>
                                                         <td>{{ $hr->experience }}</td>
                                                         <td>{{ $hr->resultbased }}</td>
                                                         <td>{{ $hr->exam }}</td>
-
-
-
-
                                                         <td>
                                                             {{ $hr->performance + $hr->experience + $hr->resultbased + $hr->exam }}
 
@@ -90,9 +69,6 @@
 
                                                         </td>
                                                         <td>
-
-
-
                                                             <div class="row">
                                                                 <div class="col-sm">
                                                                     <!-- Button trigger modal -->
@@ -560,7 +536,7 @@
 
                                                                                         @foreach ($hr->form->education as $fo)
                                                                                             <input type="text"
-                                                                                                value="[{{ $fo->certificate }} , {{ $fo->discipline1 }}]"
+                                                                                                value="[{{ $fo->level }} , {{ $fo->discipline }},{{ $fo->completion_date }}]"
                                                                                                 name="education_level"class="form-control "
                                                                                                 id="inputEmail3" readonly>
                                                                                             <input type="text"
@@ -779,17 +755,10 @@
                                                                 </div>
                                                             </td>
                                                             <td>{{ $hr->user->name }}</td>
-
-
                                                             <td>
                                                                 {{ $hr->performance + $hr->experience + $hr->resultbased + $hr->exam }}
 
                                                             </td>
-
-
-
-
-
 
                                                             <td> <a class="btn  btn-dark " type="submit" id="btn-evaluate"
                                                                     href="{{ route('addpresident', $hr->id) }}">

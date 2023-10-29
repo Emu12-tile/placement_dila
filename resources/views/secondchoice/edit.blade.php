@@ -466,7 +466,7 @@
                                             <label for="firstName">ለትምህርት ዝግጅት የሚሰጥ ነጥብ</label>
                                             <input class="form-control" @error('presidentGrade') is-invalid @enderror"
                                                 id="firstName" placeholder="ለትምህርት ዝግጅት የሚሰጥ ነጥብ ከ (35%)"
-                                                value="{{ $hr->presidentGrade }}" type="number" name="presidentGrade"
+                                                value="{{ $hr->presidentGrade }}" type="float" name="presidentGrade"
                                                 min="1" max="35" required>
                                             @error('presidentGrade')
                                                 <span class=" error invalid-feedback">
@@ -481,7 +481,7 @@
                                                 <label for="firstName">ለትምህርት ዝግጅት የሚሰጥ ነጥብ</label>
                                                 <input class="form-control" @error('performance') is-invalid @enderror"
                                                     id="firstName" placeholder="" value="{{ $hr->performance }}"
-                                                    type="number" name="performance" min="1" max="25">
+                                                    type="float" name="performance" min="0" max="25">
                                                 @error('performance')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -492,7 +492,7 @@
                                                 <label for="middleName">ለስራ ልምድ አገልግሎት የሚሰጥ ነጥብ</label>
                                                 <input class="form-control" @error('experience') is-invalid @enderror"
                                                     id="middleName" placeholder="" value="{{ $hr->experience }}"
-                                                    type="float" name="experience" min="1" max="25">
+                                                    type="float" name="experience" min="0" max="25">
                                                 @error('experience')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -503,7 +503,7 @@
                                                 <label for="lastName">ለውጤት ተኮር ምዘና </label>
                                                 <input class="form-control" @error('resultbased') is-invalid @enderror"
                                                     id="resultbased" placeholder="" value="{{ $hr->resultbased }}"
-                                                    type="number" name="resultbased">
+                                                    type="float" name="resultbased">
                                                 @error('resultbased')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -514,7 +514,7 @@
                                                 <label for="exam">ለፈተና ውጤት</label>
                                                 <input class="form-control" @error('exam') is-invalid @enderror"
                                                     id="exam" placeholder="" value="{{ $hr->exam }}"
-                                                    type="float" name="exam" min="1" max="15">
+                                                    type="float" name="exam" min="0" max="15">
                                                 @error('exam')
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
@@ -529,7 +529,7 @@
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
-                                                @enderror
+                                                @enderrors
                                             </div>
                                         </div>
                                         <div class="col-md-8">
