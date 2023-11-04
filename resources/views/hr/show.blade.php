@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 @section('content')
     <div class="container">
@@ -80,7 +79,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4 form-group">
-                                        <label for="positionofnow">አሁን ያሉበት የስራ መደብ</label>
+                                        <label for="positionofnow">አሁን ያሉበት የስራ ክፍል - የስራ መደብ</label>
                                         <input type="text" value="{{ $form->positionofnow }}"
                                             name="positionofnow"class="form-control " id="inputEmail3">
                                     </div>
@@ -127,17 +126,64 @@
 
                                     </div>
                                 @endforeach
+                                <div id="myformEdu">
+                                    <div class="row">
+                                        <div class="col-sm">
+
+                                            <div class=" formgroup row">
+
+                                                <div class="col-md-3">
+
+                                                    <label for="startingDate">Level</label>
+                                                    <input type="text" name="addFieldsEducation[0][level]"
+                                                        value="{{ old('level') }}"
+                                                        class="form-control  @error('level') is-invalid @enderror"
+                                                        id="level" placeholder="level ">
+                                                    @error('level')
+                                                        <span class=" error invalid-feedback">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="discipline">የትምህርት ዝግጅት </label>
+                                                    <input type="text" min="discipline"
+                                                        name="addFieldsEducation[0][discipline]"
+                                                        value="{{ old('discipline') }}"
+                                                        class="form-control  @error('discipline') is-invalid @enderror"
+                                                        id="discipline" placeholder=" discipline">
+                                                    @error('discipline')
+                                                        <span class=" error invalid-feedback">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="completion_date">completion_date</label>
+                                                    <input type="text" name="addFieldsEducation[0][completion_date]"
+                                                        value="{{ old('completion_date') }}"
+                                                        class="form-control  @error('completion_date') is-invalid @enderror"
+                                                        id="completion_date" placeholder="completion_date">
+                                                    @error('completion_date')
+                                                        <span class=" error invalid-feedback">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:void(0)"
+                                                        class="btn color-wrap text-white bg-blue-dark-4  addRowEdu mt-40 "
+                                                        style=" border-radius:50%">+</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
 
 
-
-
-
-
-
-
-
-
-
+                                </div>
                                 <h3 class="text-white text-center
                                         mt-3 mb-4 "
                                     style=" background-color:#088c13; margin:center">
@@ -441,6 +487,7 @@
         $(document).ready(function() {
 
             var i = 0
+            var j = 0
             $(".addRow").click(function(e) {
                 ++i;
                 e.preventDefault();
@@ -455,7 +502,7 @@
 
                                                     <input type="date" name="addFields[${i}][startingDate]" value="{{ old('startingDate') }}"
                                                         class="form-control  @error('startingDate') is-invalid @enderror"
-                                                        id="startingDate" placeholder=" ">
+                                                        id="startingDate" placeholder="startingDate ">
                                                     @error('startingDate')
                                                         <span class=" error invalid-feedback">
                                                             <strong>{{ $message }}</strong>
@@ -509,6 +556,75 @@
                 e.preventDefault();
 
                 let row_item = $(this).parents('.formgr');
+                $(row_item).remove();
+            });
+            $(".addRowEdu").click(function(e) {
+                ++j;
+                e.preventDefault();
+                $("#myformEdu").append(`
+                   <div class="row">
+                                        <div class="col-sm">
+
+                                            <div class=" formgroup row">
+
+                                                <div class="col-md-3">
+
+                                                    <label for="startingDate"></label>
+                                                    <input type="text" name="addFieldsEducation[${j}][level]"
+                                                        value="{{ old('level') }}"
+                                                        class="form-control  @error('level') is-invalid @enderror"
+                                                        id="level" placeholder="level ">
+                                                    @error('level')
+                                                        <span class=" error invalid-feedback">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="discipline"> </label>
+                                                    <input type="text" min="discipline"
+                                                        name="addFieldsEducation[${j}][discipline]" value="{{ old('discipline') }}"
+                                                        class="form-control  @error('discipline') is-invalid @enderror"
+                                                        id="discipline" placeholder=" discipline">
+                                                    @error('discipline')
+                                                        <span class=" error invalid-feedback">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="completion_date"></label>
+                                                    <input type="text" name="addFieldsEducation[${j}][completion_date]"
+                                                        value="{{ old('completion_date') }}"
+                                                        class="form-control  @error('completion_date') is-invalid @enderror"
+                                                        id="completion_date" placeholder="completion_date">
+                                                    @error('completion_date')
+                                                        <span class=" error invalid-feedback">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:void(0)"
+                                                        class="btn color-wrap text-white bg-red-dark-4  removeRowEdu mt-40 "
+                                                        style=" border-radius:50%">-</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                    `);
+            });
+
+            $(document).on('click', '.removeRowEdu', function(e) {
+
+                e.preventDefault();
+
+                let row_item = $(this).parents('.formgroup');
                 $(row_item).remove();
             });
             $(document).on('change', '.dynamic', function() {

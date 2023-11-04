@@ -321,44 +321,39 @@ class FormController extends Controller
         $form->resultOfrecentPerform = $request->Input('resultOfrecentPerform');
         $form->DisciplineFlaw = $request->Input('DisciplineFlaw');
         $form->fee = $request->Input('fee');
-
         $form->UniversityHiringEra = $request->Input('UniversityHiringEra');
         $form->servicPeriodAtUniversity = $request->Input('servicPeriodAtUniversity');
         $form->servicPeriodAtAnotherPlace = $request->Input('servicPeriodAtAnotherPlace');
-
-
         $form->serviceBeforeDiplo = $request->Input('serviceBeforeDiplo');
         $form->serviceAfterDiplo = $request->Input('serviceAfterDiplo');
         $form->MoreRoles = $request->Input('MoreRoles');
-
-
-
         $form->sex = $request->Input('sex');
         $form->email = $request->Input('phone');
         $form->positionofnow = $request->Input('positionofnow');
 
-
-
-        // $edu = Education::where('form_id', $form->id)->get();
-
-        //   try
-
-
         $field = $request->input('addMoreFields');
-        // dd($field);
+        foreach ($request->addFieldsEducation as $key => $value) {
+            // Check if the required fields have values
+            if (
+                isset($value['level']) &&
+                isset($value['discipline']) &&
+                isset($value['completion_date'])
+            ) {
+                Education::create([
+                    'form_id' => $form->id,
+                    'level' => $value['level'],
+                    'discipline' => $value['discipline'],
+                    'completion_date' => $value['completion_date'],
+                ]);
+            }
+        }
         foreach ($form->education as $education) {
-
-
-
             foreach ($field as $key => $value) {
-
-
                 if ($value['id'] == $education->id) {
                     $education = Education::findOrFail($education->id);
 
                     $education->level = $value['level'];
                     $education->discipline = $value['discipline'];
-
                     $education->completion_date = $value['completion_date'];
                     // dd($experience);
                     $education->update();
@@ -391,34 +386,19 @@ class FormController extends Controller
         }
 
         foreach ($form->experiences as $experience) {
-
-
-
             foreach ($inputFields as $key => $value) {
-
-
                 if ($value['id'] == $experience->id) {
                     $experience = Experience::findOrFail($experience->id);
-
                     $experience->positionyouworked = $value['positionyouworked'];
                     $experience->startingDate = $value['startingDate'];
-
                     $experience->endingDate = $value['endingDate'];
-                    // dd($experience);
-                    // dd($experience);
                     $experience->update();
                 }
             }
         }
-
-
-
         $form->update();
         return redirect('hr');
     }
-
-
-
     public function updateForms(Request $request, $id)
     {
         $form = Form::find($id);
@@ -441,7 +421,6 @@ class FormController extends Controller
 
     public function position(Request $request)
     {
-
         $position = Position::select('position', 'positions.id')
             ->join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', '=', 'active')
@@ -465,34 +444,23 @@ class FormController extends Controller
 
     public function selection(Request $request)
     {
-
         $selected = Position::all()->where("id", $request->id)->first();
-
-
         return response()->json($selected);
     }
     public function selection2(Request $request)
     {
         $selected = choice2::all()->where("id", $request->id)->first();
-
-
         return response()->json($selected);
     }
-
     public function update(Request $request, $id)
     {
         $hr = Form::find($id);
-
-
         //  dd($hr);
-
-
         $hr->isEditable = 1;
         $hr->submit = auth()->user()->name;
 
         $hr->update();
         // dd($hr);
-
         return back()->with('status', 'approved  successfully');
     }
 
@@ -504,8 +472,6 @@ class FormController extends Controller
     public function destroy($id)
     {
         $form = Form::find($id);
-
-
         $form->delete();
         return back()->with('status', '  deleted successfully');
     }
