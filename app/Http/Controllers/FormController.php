@@ -321,6 +321,7 @@ class FormController extends Controller
         $form->resultOfrecentPerform = $request->Input('resultOfrecentPerform');
         $form->DisciplineFlaw = $request->Input('DisciplineFlaw');
         $form->fee = $request->Input('fee');
+        $form->level=$request->Input('level');
         $form->UniversityHiringEra = $request->Input('UniversityHiringEra');
         $form->servicPeriodAtUniversity = $request->Input('servicPeriodAtUniversity');
         $form->servicPeriodAtAnotherPlace = $request->Input('servicPeriodAtAnotherPlace');
