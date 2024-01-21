@@ -32,19 +32,44 @@ class FormController extends Controller
 {
 
 
-    public function index()
+    // public function index()
+    // {
+    //     $forms = Form::where('hrs', null)->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id', 'isEditable')->get();
+    //     return view('hr.index', ['forms' => $forms]);
+    // }
+ public function index()
     {
-        // $forms = Form::all()->where('hrs', null);
-        $forms = Form::where('hrs', null)->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id', 'isEditable')->get();
-        // dd($forms);
+        $forms = null;
+        $searchValue = request()->input('search');
 
-        // $forms = Form::where('hrs', null)->paginate(10);
-        // dd($forms);
-        // $forms = Form::whereNotNull('hrs')->select('firstName', 'middleName', 'lastName', 'id')->get();
+        if ($searchValue) {
+            $searchWords = explode(' ', $searchValue);
 
-        return view('hr.index', ['forms' => $forms]);
+            $forms = Form::where('hrs', null)
+                ->where(function ($query) use ($searchWords) {
+                    foreach ($searchWords as $word) {
+                        $query->where(function ($innerQuery) use ($word) {
+                            $innerQuery->where('firstName', 'like', '%' . $word . '%')
+                                ->orWhere('middleName', 'like', '%' . $word . '%')
+                                ->orWhere('lastName', 'like', '%' . $word . '%');
+                        });
+                    }
+                })
+                ->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id',  'isEditable')
+                ->paginate(10);
+        } else {
+            $searchValue = null;
+            // Only fetch all data when there's no search value
+            $forms = Form::where('hrs', null)
+                ->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id',  'isEditable')
+                ->paginate(10);
+        }
+
+        return view('hr.index', [
+            'forms' => $forms,
+            'searchValue' => $searchValue,
+        ]);
     }
-
     public function form()
     {
 
