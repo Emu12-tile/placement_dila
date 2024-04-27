@@ -94,6 +94,7 @@ Route::middleware([
 
     Route::resource('/jobcategory', JobCategoryController::class);
     Route::resource('/jobcat2', JobCat2Controller::class);
+    Route::get('/resource/retunApplicant/{id}', [FormController::class, 'returnApplicant'])->name('returnApplicant');
 });
 Route::middleware([
     'auth:sanctum',
@@ -126,6 +127,7 @@ Route::middleware([
 ])->group(function () {
     Route::resource('/resource', ResourceController::class);
     Route::get('/resource/add/{id}', [ResourceController::class, 'createhr'])->name('addHr');
+
     Route::get('/resource/edit/{id}', [ResourceController::class, 'edit']);
     Route::put('update-resource/{id}', [ResourceController::class, 'update1']);
     Route::put('update-lowresource/{id}', [ResourceController::class, 'update2']);
