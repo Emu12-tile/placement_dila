@@ -116,10 +116,6 @@ class ResourceController extends Controller
     {
 
         $hrs = HR::where('status_hr', 0)->get();
-
-
-
-
         return view('lowresource.lowresource', compact('hrs'));
     }
     public function index3()
@@ -173,13 +169,6 @@ class ResourceController extends Controller
 
         }
         $resource->save();
-
-
-
-
-
-
-
         if ($request->type == 'high') {
             return redirect('resource')->with('status', 'evaluation added successfully');
         } else if ($request->type == 'low') {
@@ -238,10 +227,6 @@ class ResourceController extends Controller
     public function update(Request $request, $id)
     {
         $hr = HR::find($id);
-
-
-
-
         $hr->performance = $request->Input('performance');
         $hr->experience = $request->Input('experience');
         $hr->remark = $request->Input('remark');
@@ -271,6 +256,8 @@ class ResourceController extends Controller
         // return redirect('resource')->with('status', 'stock updated successfully');
         return redirect()->back()->with('status', 'stock updated successfully');
     }
+
+  
     public function update2(Request $request, $id)
     {
         $hr = HR::find($id);
@@ -280,10 +267,6 @@ class ResourceController extends Controller
         $hr->submit = auth()->user()->name;
 
         $hr->update();
-
-
-
-
         return redirect()->back()->with('status', 'stock updated successfully');
     }
 
@@ -304,4 +287,5 @@ class ResourceController extends Controller
 
         return response()->json($position);
     }
+
 }

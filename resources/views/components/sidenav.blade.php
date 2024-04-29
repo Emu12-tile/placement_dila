@@ -35,11 +35,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('pos') }}">
+                            <a class="nav-link" href="{{ route('hr.index') }}">
                                 <i class="ion ion-ios-list-box"></i>
                                 <span class="nav-link-text">
-                                    የተወዳዳሪዎች 1ኛ ምርጫ
-                                </span>
+                                    የተወዳዳሪዎች ዝርዝር </span>
                             </a>
                         </li>
                         <li class="nav-item">
