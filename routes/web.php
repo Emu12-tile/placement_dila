@@ -104,7 +104,8 @@ Route::middleware([
 ])->group(
     function () {
         Route::resource('/hr', FormController::class);
-
+        Route::get('/createform', [FormController::class, 'createForm'])->name('createform');
+        Route::post('/addForm', [FormController::class, 'storeTry2'])->name('add.createForm');
         Route::get('/hr/try/job', [FormController::class, 'position']);
         Route::get('/hr/try/categ2', [FormController::class, 'position2']);
         Route::get('/hr/try/selection', [FormController::class, 'selection']);

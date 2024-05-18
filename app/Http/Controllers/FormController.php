@@ -70,6 +70,21 @@ class FormController extends Controller
     //             'searchValue' => $searchValue,
     //         ]);
     //     }
+
+    public function createForm()
+    {
+        $level = Level::all();
+        $form = Form::all();
+
+        $edu_level = EduLevel::all();
+        $job_category = JobCategory::all();
+
+        $position = Position::join('categories', 'categories.id', '=', 'positions.category_id')
+            ->where('categories.catstatus', 'active')->get();
+        $jobcat2 = jobcat2::all();
+        $edutype = EducationType::all();
+        return view('try2', compact('level', 'edu_level', 'job_category', 'position', 'jobcat2', 'edutype', 'form'));
+    }
     public function form()
     {
 
@@ -512,5 +527,105 @@ class FormController extends Controller
         $form = Form::find($id);
         $form->delete();
         return back()->with('status', '  deleted successfully');
+    }
+    public function storeTry2(Request $request)
+    {
+        $this->validate($request, [
+            'firstName' => 'required',
+            'middleName' => 'required',
+            'lastName' => 'required',
+            'sex' => 'required',
+            'email' => ['nullable', 'string', 'email', 'max:255',  'regex:/(.*)@du.edu.et/i'],
+            'phone' => 'nullable',
+            'positionofnow' => 'required',
+            'fee' => 'nullable',
+
+            'addMoreInputFields.*.startingDate' => 'date|nullable',
+            'addMoreInputFields.*.endingDate' => 'date|after:starting_date|nullable',
+            'addMoreInputFields.*.positionyouworked' => 'nullable',
+            'UniversityHiringEra' => 'nullable',
+            'servicPeriodAtUniversity' => 'nullable',
+            'servicPeriodAtAnotherPlace' => 'nullable',
+            'serviceBeforeDiplo' => 'nullable',
+            'serviceAfterDiplo' => 'nullable',
+            'resultOfrecentPerform' => 'required', 'regex:/^(?:d*.d{1,2}|d+)$/', 'min:1', 'max:100',
+            'DisciplineFlaw' => 'nullable',
+            'moreRoles' => 'nullable',
+            'level' => 'nullable',
+
+        ]);
+
+        $previousforms = Form::select('categories.id')
+            ->join('positions', 'positions.id', '=', 'forms.position_id')
+            ->join('categories', 'categories.id', '=', 'positions.category_id')
+
+            ->where('email', $request->email)
+
+            ->get();
+
+
+        $category = Position::select('categories.id')->join('categories', 'category_id', 'categories.id')->where('positions.id', $request->position_id)->first();
+
+        // foreach ($previousforms as $form) {
+        //     if ($form->id == $category->id) {
+        //         return  redirect()->back()->withErrors(['custom_email_error' => ' በዚህ ስራ መደብ መወዳደር አይችሉም'])->withInput();
+        //     }
+        // }
+        $form =
+            Form::create(
+                [
+                    'firstName' => $request->firstName,
+                    'middleName' => $request->middleName,
+                    'lastName' => $request->lastName,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+
+                    'level' => $request->level,
+                    'positionofnow' => $request->positionofnow,
+
+                    'sex' => $request->sex,
+                    'fee' => $request->fee,
+                    // "UniversityHiringEra" => $request->UniversityHiringEra,
+                    // "servicPeriodAtUniversity" => $request->servicPeriodAtUniversity,
+                    // "servicPeriodAtAnotherPlace" => $request->servicPeriodAtAnotherPlace,
+                    // "serviceBeforeDiplo" => $request->serviceBeforeDiplo,
+                    // "serviceAfterDiplo" => $request->serviceAfterDiplo,
+                    "resultOfrecentPerform" => $request->resultOfrecentPerform,
+                    "DisciplineFlaw" => $request->DisciplineFlaw,
+                    "moreRoles" => $request->moreRoles,
+                    // 'registeredBy' => auth()->user()->name,
+                    // 'DisciplineFlawDate' => $request->DisciplineFlawDate,
+                    // 'employer_support' => $request->employer_support,
+                ]
+            );
+
+        if (!empty($request->addMoreFields)) {
+            foreach ($request->addMoreFields as $key => $val) {
+
+                Education::create([
+                    "form_id" => $form->id,
+                    "discipline" => $val["discipline"],
+                    "level" => $val["level"],
+                    "completion_date" => $val["completion_date"]
+
+
+                ]);
+            }
+        }
+        if (!empty($request->addMoreFields)) {
+            foreach ($request->addMoreInputFields as $key => $value) {
+                experience::create([
+                    "form_id" => $form->id,
+                    "positionyouworked" => $value["positionyouworked"],
+                    "startingDate" => $value["startingDate"],
+                    "endingDate" => $value["endingDate"],
+                ]);
+            }
+        }
+
+
+
+        // dd($form);
+        return redirect('createform')->with('success', 'Form submitted successfully!')->with('fadeout', true);;
     }
 }

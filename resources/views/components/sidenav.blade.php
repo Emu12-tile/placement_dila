@@ -99,6 +99,14 @@
                     @endrole
                     @role('admin')
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('createform') }}">
+                                <i class="ion ion-ios-list-box"></i>
+                                <span class="nav-link-text">
+                                    Add Applicant
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('hr.index') }}">
                                 <i class="ion ion-ios-list-box"></i>
                                 <span class="nav-link-text">
