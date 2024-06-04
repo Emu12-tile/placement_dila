@@ -464,6 +464,7 @@
 
                                                             <th>ብዜት</th>
                                                             <th>ዓመት-ወር-ቀን</th>
+                                                            <th></th>
 
 
                                                         </tr>
@@ -519,6 +520,8 @@
                                                             <td colspan="2" class="text-center">ድምር</td>
                                                             {{-- <td></td> --}}
                                                             <td id="total-year"></td>
+                                                            <td>- {{ preg_replace('/[^0-9]/', '', $hr->form->choice2->experience) }}</td>
+
                                                         </tr>
                                                     </tbody>
                                                 </table>

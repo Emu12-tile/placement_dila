@@ -25,23 +25,14 @@
                             <thead>
                                 <tr>
                                     <th>ተቁ</th>
-
-
-
-
                                     <th>የሚወዳደሩበት የስራ መደብ</th>
-
-
-
-
-
-
 
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach ($forms as $i => $form)
+                                @if($form->position_type_id==2)
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>
@@ -52,17 +43,8 @@
                                                 </a>
                                             </form>
                                         </td>
-
-
-
-
-
-
-
-
-
-                                        </td>
                                     </tr>
+                                    @endif
                                 @endforeach
 
                             </tbody>
