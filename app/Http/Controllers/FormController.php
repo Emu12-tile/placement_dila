@@ -119,8 +119,9 @@ class FormController extends Controller
     }
     public function pos()
     {
-        $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
-            ->join('categories', 'categories.id', '=', 'positions.category_id')
+        $forms = Position::
+            // join('forms', 'forms.position_id', '=', 'positions.id')
+            join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
             ->distinct('positions.id')
             ->get(['positions.id', 'positions.position', 'positions.job_category_id','categories.category']);
