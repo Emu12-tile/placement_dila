@@ -5,7 +5,7 @@
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
                     <div class="pull-right">
-                        <a class="btn btn-dark" href="{{ route('resource.index') }}"> Back</a>
+                        {{-- <a class="btn btn-dark" href="{{ route('resource.index') }}"> Back</a> --}}
                     </div>
                     <h5 class="hk-sec-title"> የመመዘኛ መስፈርቶች
                     </h5>
@@ -529,7 +529,7 @@
                                                     <span class=" error invalid-feedback">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
-                                                @enderrors
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-8">

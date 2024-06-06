@@ -546,8 +546,6 @@
                                                         <thead class="thead-active">
                                                             <tr>
                                                                 <th>ዓመት-ወር-ቀን</th>
-
-
                                                                 <th>ብዜት</th>
                                                                 <th>ዓመት-ወር-ቀን</th>
                                                                 <th></th>
@@ -561,9 +559,6 @@
                                                             @foreach ($forms as $fo)
                                                                 <tr data-id="{{ $fo->id }}">
                                                                     <td>
-
-
-
                                                                         <?php
 
                                                                         $fdate = Carbon::parse($fo->startingDate);

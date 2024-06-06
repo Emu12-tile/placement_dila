@@ -585,10 +585,6 @@
                 </div>
             </section>
 
-
-
-
-
         </div>
     @endrole
 
