@@ -83,8 +83,8 @@ class ResourceController extends Controller
             ->where('categories.catstatus', 'active')
             // ->whereNotNull('forms.hrs',)
             // ->orWhereNotNull('forms.secondhrs')
-            ->where('positions.position_type_id', 2)
-            ->distinct('positions.id')
+            // ->where('positions.position_type_id', 2)
+            // ->distinct('positions.id')
             ->get(['positions.id', 'positions.position', 'positions.job_category_id','positions.position_type_id']);
 
         return view('lowresource.pos', compact('forms'));

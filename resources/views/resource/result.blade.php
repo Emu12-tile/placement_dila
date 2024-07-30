@@ -383,12 +383,12 @@
                                                                     <button type="button"
                                                                         class="btn bg-green-dark-4 text-white btn-sm"
                                                                         data-toggle="modal"
-                                                                        data-target="#id1_{{ $i }}">
+                                                                        data-target="#id2_{{ $i }}">
                                                                         Submit
                                                                     </button>
 
                                                                     <!-- Modal -->
-                                                                    <div class="modal fade" id="id1_{{ $i }}"
+                                                                    <div class="modal fade" id="id2_{{ $i }}"
                                                                         tabindex="-1" role="dialog"
                                                                         aria-labelledby="exampleModalCenter" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered"
@@ -434,11 +434,11 @@
 
 
                                                             <button type="button" class="btn btn-primary requestStat btn-sm "
-                                                                data-toggle="modal" data-target="#id_{{ $i }}"><i
+                                                                data-toggle="modal" data-target="#id1s_{{ $i }}"><i
                                                                     class="ion ion-md-archive "></i>pdf
                                                             </button>
 
-                                                            <div class="modal fade" id="id_{{ $i }}" tabindex="-1"
+                                                            <div class="modal fade" id="id1s_{{ $i }}" tabindex="-1"
                                                                 role="dialog" aria-labelledby="exampleModalLongTitle"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
