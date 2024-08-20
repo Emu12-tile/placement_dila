@@ -14,7 +14,7 @@
 
 
             </div>
-            <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች 1ኛ ምርጫ በስራ አስፈጻሚ የስራ መደብ ስር</h5>
+            <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች  ምርጫ በስራ አስፈጻሚ የስራ መደብ ስር</h5>
 
 
             <div class="row" id="search_list">
@@ -25,18 +25,7 @@
                             <thead>
                                 <tr>
                                     <th>ተቁ</th>
-
-
-
-
                                     <th>የሚወዳደሩበት የስራ መደብ</th>
-
-
-
-
-
-
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,7 +80,7 @@
 
 
             </div>
-            <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች 1ኛ ምርጫ በቡድን መሪ የስራ መደብ ስር</h5>
+            <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች  ምርጫ በቡድን መሪ የስራ መደብ ስር</h5>
 
 
             <div class="row" id="search_list">

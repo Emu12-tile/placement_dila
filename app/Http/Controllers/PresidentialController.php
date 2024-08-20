@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HR;
 use App\Models\Form;
 use App\Models\Position;
+use App\Models\Prestwo;
 use App\Models\Secondhr;
 use App\Models\Education;
 use App\Models\President;
@@ -43,8 +44,9 @@ class PresidentialController extends Controller
 
     public function pos()
     {
-        $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
-            ->join('categories', 'categories.id', '=', 'positions.category_id')
+        $forms = Position::
+            
+            join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
             ->where('positions.position_type_id', 1)
             ->distinct('positions.id')
@@ -66,10 +68,18 @@ class PresidentialController extends Controller
             ->where('positions.id', $pos_id)
             ->select('presidents.*')
             ->get();
+            $prestwo = Prestwo::join('secondhrs', 'secondhrs.id', '=', 'prestwos.secondhr_id')
+            ->join('forms', 'forms.id', '=', 'secondhrs.form_id')
+            ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+
+            // ->where('status', 1)
+            ->where('choice2s.id', $pos_id)
+            ->select('prestwos.*')
+            ->get();
 
 
 
-        return view('presidential.presresult', compact('pres'));
+        return view('presidential.presresult', compact('pres','prestwo'));
     }
     public function createpresident($prod_id)
     {

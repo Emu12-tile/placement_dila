@@ -7,6 +7,8 @@ use App\Models\Form;
 use App\Models\Secondhr;
 use App\Models\Education;
 use App\Models\experience;
+use App\Models\HR;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SecondhrController extends Controller
@@ -92,13 +94,35 @@ class SecondhrController extends Controller
     {
 
         $forms = choice2::join('forms', 'forms.choice2_id', '=', 'choice2s.id')
-            ->join('categories', 'categories.id', '=', 'choice2s.category_id')
-            ->where('categories.catstatus', 'active')
-            ->where('choice2s.position_type_id', 1)
-            ->distinct('choice2s.id')
-            ->get(['choice2s.id', 'choice2s.position', 'choice2s.jobcat2_id', 'categories.category']);
+        ->join('categories', 'categories.id', '=', 'choice2s.category_id')
+        ->where('categories.catstatus', 'active')
+        ->where('choice2s.position_type_id', 1)
+        ->distinct('choice2s.id')
+        ->get(['choice2s.id', 'choice2s.position', 'choice2s.jobcat2_id', 'categories.category']);
+        $hrs = HR::join('forms', 'forms.id', '=', 'h_r_s.form_id')
+        ->join('positions', 'positions.id', '=', 'forms.position_id')
+        
 
-        return view('secondchoice.postwo', compact('forms'));
+        ->select('h_r_s.*','forms.position_id as position_id')
+        ->addSelect(DB::raw("'first_choice' as source"))
+        ->where('positions.position_type_id', 2)
+
+
+        ->get();
+        $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+        ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+        
+
+        ->select('secondhrs.*','forms.choice2_id as position_id')
+        ->addSelect(DB::raw("'second_choice' as source"))
+        ->where('choice2s.position_type_id', 2)
+
+        ->get();
+        
+        $combinedData = $hrs->concat($secondhrs);
+        // dd($combinedData);
+        $groupedData = $combinedData->groupBy('position_id');
+    return view('secondchoice.postwo', compact('groupedData'));
     }
     public function posDetailtwo($id)
     {

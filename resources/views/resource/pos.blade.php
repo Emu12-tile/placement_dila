@@ -263,7 +263,7 @@
 
 
             </div>
-            <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች 1ኛ  ሥራ አስፈጻሚ </h5>
+            <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች  ሥራ አስፈጻሚ </h5>
 
 
             <div class="row" id="search_list">
@@ -346,7 +346,7 @@
 
 
             </div>
-            <h5 class="hk-sec-title"> ከቡድን መሪ በላይ ተወዳዳሪዎች 1ኛ ምርጫ በቡድን መሪ የስራ መደብ ስር </h5>
+            <h5 class="hk-sec-title"> ከቡድን መሪ በላይ ተወዳዳሪዎች  ምርጫ በቡድን መሪ የስራ መደብ ስር </h5>
 
 
             <div class="row" id="search_list">
